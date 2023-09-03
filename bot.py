@@ -22,7 +22,7 @@ def run_discord_bot():
     @client.tree.command(name = "youtube" , description = "Downloads the youtube video")
     @app_commands.describe(thing_to_search = "Video Link" )
     async def youtube(interaction: discord.Interaction, thing_to_search: str):
-        await interaction.response.send_message(f'')
+        await interaction.response.send_message(f'{interaction.user.mention}, seu link de download: {youtube.download_link(thing_to_search)}')
 
     @client.tree.command(name = "hello" , description = "Says hello to the user")
     async def hello(interaction: discord.Interaction):
