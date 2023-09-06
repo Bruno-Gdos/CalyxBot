@@ -6,6 +6,8 @@ from qrcode.image.styles.moduledrawers import CircleModuleDrawer
 from PIL import Image, ImageDraw
 import discord
 import os
+from io import BytesIO
+import base64
 
 
 CALYX_ICON_PATH = "Calyx.png"
@@ -45,8 +47,7 @@ async def  qr_generator (content :str, timestamp, ctx):
 
     mask = style_eyes(qr_img)
     final_img = Image.composite(qr_eyes_img, qr_img, mask)
-    
-    final_img.save(f"qrCode{timestamp}.png")
-
-    await ctx.send(file=discord.File(f"qrCode{timestamp}.png"))
-    os.remove(f"qrCode{timestamp}.png")
+    temp = BytesIO()
+    final_img.save(temp, format="png")
+    temp.seek(0)
+    await ctx.send(file=discord.File(temp, filename='qrCode.png'))
