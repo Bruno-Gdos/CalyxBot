@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import qrcode
 from qrcode.image.styledpil import StyledPilImage
 from qrcode.image.styles.moduledrawers.pil import RoundedModuleDrawer

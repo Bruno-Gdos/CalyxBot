@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pytube
 from pytube import YouTube
 import re 
