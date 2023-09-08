@@ -14,24 +14,30 @@ import open_ai
 import io, base64  # Add these imports to the top of the file
 
 
+# Defina o token do bot
 BOT_TOKEN = os.environ['BOT_TOKEN']
 
-
-
+# Define a função principal para executar o bot do Discord
 def run_discord_bot():
+    # Configura as intenções do bot
     intents = discord.Intents.default()
     intents.message_content = True
+
+    # Configura as intenções do bot
     client = discord.Client(intents=intents, activity=discord.Activity(type=discord.ActivityType.listening, name="música"), command_prefix='$')
     client = commands.Bot(command_prefix='$', intents=intents)
     client.command_prefix = '$'
 
+    # Dicionário para manter as filas de música por servidor
     music_queues = {}
 
+    # Dicionário para manter as filas de música por servidor
     @client.event
     async def on_ready():
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="música"))
         print("Calyx is ready.")
 
+    # Dicionário para manter as filas de música por servidor
     @client.event
     async def on_message(message):
             if message.author == client.user:
@@ -43,8 +49,28 @@ def run_discord_bot():
                 await client.process_commands(message)
                 return     
 
-    #usar slash commands
+    # Comando para exibir a lista de comandos disponíveis
+    @client.command()
+    async def ajuda(ctx):
+        embed = discord.Embed(
+            title="Comandos Disponíveis:",
+            description=(
+                "1. $youtube <URL> - Gera um link de download para um vídeo do YouTube.\n"
+                "2. $join - Conecta o bot a um canal de voz.\n"
+                "3. $leave - Desconecta o bot de um canal de voz.\n"
+                "4. $play <URL> - Toca música a partir de uma URL do YouTube.\n"
+                "5. $skip - Pula a música atual.\n"
+                "6. $pause - Pausa a reprodução de música.\n"
+                "7. $qr <conteúdo> - Gera um código QR com o conteúdo especificado.\n"
+                "8. $pelando <r/q> - Obtém promoções do Pelando (r para recentes, q para mais quentes).\n"
+                "9. $gpt <texto> - Gera uma resposta usando GPT-3 com base no texto fornecido.\n"
+                "10. $img <texto> - Gera uma imagem com base no texto fornecido."
+            ),
+            color=0x00ff00,
+        )
+        await ctx.send(embed=embed)
 
+    # Comando para gerar um link de download de vídeo do YouTube
     @client.command()
     async def youtube(ctx, url):
         try:
@@ -57,7 +83,8 @@ def run_discord_bot():
             await ctx.send(embed=embed)
         except Exception as e:
             await ctx.send(f'{ctx.author.mention}, {e}')        
-    
+
+    # Comando para conectar o bot a um canal de voz
     @client.command()
     async def join(ctx):
         if ctx.author.voice:
@@ -71,6 +98,7 @@ def run_discord_bot():
         else:
             await ctx.send(f'{ctx.author.mention}, você não está conectado a nenhum canal de voz.')
 
+    # Comando para desconectar o bot de um canal de voz
     @client.command()
     async def leave(ctx):
         if ctx.guild.voice_client:
@@ -82,7 +110,7 @@ def run_discord_bot():
                 return
         await ctx.send(f'{ctx.author.mention}, eu não estou conectado ao seu canal de voz.')
 
-   
+    # Comando para tocar música a partir de uma URL do YouTube
     @client.command()
     async def play(ctx, url):
         try:
@@ -118,6 +146,7 @@ def run_discord_bot():
         except Exception as e:
             await ctx.send(f'{ctx.author.mention}, {e}')
 
+    # Função para tocar a próxima música da fila
     async def play_next(ctx):
         if ctx.guild.id in music_queues and len(music_queues[ctx.guild.id]) > 0:
             for i in range(0,len(music_queues[ctx.guild.id])):
@@ -144,12 +173,14 @@ def run_discord_bot():
         else:
             await ctx.send("Fila de música vazia.")
 
+    # Função para tocar a próxima música da fila
     @client.command()
     async def skip(ctx):
         if ctx.guild.voice_client and ctx.guild.voice_client.is_playing():
             ctx.voice_client.stop()
             await ctx.send("Música pulada.")
 
+    # Função para tocar a próxima música da fila
     @client.event
     async def on_voice_state_update(member, before, after):
         if before.channel is not None and after.channel is None:
@@ -160,7 +191,7 @@ def run_discord_bot():
                 await member.guild.voice_client.disconnect()
                 del music_queues[member.guild.id]
 
-
+    # Função para tocar a próxima música da fila
     @client.command()
     async def pause(ctx):
         if ctx.guild.voice_client:
@@ -172,6 +203,7 @@ def run_discord_bot():
         else:
             await ctx.send(f'{ctx.author.mention}, eu não estou conectado ao seu canal de voz.')
 
+    # Função para tocar a próxima música da fila
     @client.command()
     async def qr(ctx, content):
         try:
@@ -179,8 +211,8 @@ def run_discord_bot():
             await qrCode_Generator.qr_generator(content, timestamp, ctx)
         except Exception as e:
             await ctx.send(f'{ctx.author.mention}, {e}')
-            
-    
+
+    # Comando para obter promoções do Pelando (recentes ou mais quentes)
     @client.command()
     async def pelando(ctx, model_pelando):
         try:
@@ -195,6 +227,7 @@ def run_discord_bot():
         except Exception as e:
             await ctx.send(f'{ctx.author.mention}, {e}')
 
+    # Comando para obter promoções do Pelando (recentes ou mais quentes)
     @client.command()
     async def gpt(ctx):
         try:
@@ -211,7 +244,8 @@ def run_discord_bot():
             await ctx.send(f'{ctx.author.mention}\n\n{retorno_gpt}')
         except Exception as e:
             await ctx.send(f'{ctx.author.mention}, {e}')
-
+            
+    # Comando para obter promoções do Pelando (recentes ou mais quentes)
     @client.command()
     async def img(ctx):
         try:
@@ -227,5 +261,6 @@ def run_discord_bot():
         except Exception as e:
             await ctx.send(f'{ctx.author.mention}, {e}')
 
+    # Execute o bot com o token especificado
     client.run(BOT_TOKEN)
     
