@@ -1,12 +1,12 @@
 
 <p align="center">
-    <img src="https://github.com/Bruno-Gdos/CalyxBot/assets/87917525/737d85a9-3b77-4920-b88a-eb7299599e3b" alt="image" width="120px">
+    <img src="https://github.com/Bruno-Gdos/CalyxBot/assets/87917525/6c169f19-1e73-4184-bb49-87b7c3578aa6" alt="image">
     <H1> CalyxBot </H1>
 </p>
 
-CalyxBot é um bot do discord que possui diversas funcionalidades, dentre elas a reprodução de audio e utilização de IA generativa. 
 
-
+CalyxBot é um bot do discord que possui diversas funcionalidades, dentre elas a reprodução de áudio e utilização de IA generativa. 
+<br><b> A sua utilização é somente para fins educacionais e sem fins lucrativos.</b>
 
 ## Funcionalidades
 
@@ -36,8 +36,16 @@ CalyxBot é um bot do discord que possui diversas funcionalidades, dentre elas a
   <summary> Reprodução de músicas</summary>
   
   ### ScreenShot
-  <img src="https://github.com/Bruno-Gdos/CalyxBot/assets/87917525/efb35226-6177-45df-acea-983c543d1760)" alt="image" width="400px">
+  <img src="https://github.com/Bruno-Gdos/CalyxBot/assets/87917525/efb35226-6177-45df-acea-983c543d1760" alt="image" width="400px">
 </details>
+
+<details>
+  <summary> Busca das melhores promoções do [Pelando](https://www.pelando.com.br/)</summary>
+  
+  ### ScreenShot
+  <img src="https://github.com/Bruno-Gdos/CalyxBot/assets/87917525/94b6a8cc-cfeb-423b-9278-256572c93ceb" alt="image" width="500px">
+</details>
+
 
 
 
@@ -66,12 +74,17 @@ CalyxBot é um bot do discord que possui diversas funcionalidades, dentre elas a
 - Execute o script principal
 
 ```bash
-python main.py
+  python main.py
 ```
 
+## Deploy em nuvem
+No momento a CalyxBot encontra-se hospedada na **Google Cloud** em uma instância **e2-micro** na região **us-central1** que atende todas as necessidades para utilização de forma pessoal. O Deploy foi feito como forma de colar em prática meus conhecimentos adquiridos durante os cursos realizadas pela Google Cloud Skill Boost. Entretanto, não farei a divulgação a respeito do link, pois o bot é somente para fins didáticos.
 
-    
+## Curiosidades
 
+A CalyxBot surgiu como um projeto de uma noite para que pudesse ser usado como um exemplo para ensinar [Levi](https://github.com/levimotaa) e [Neto](https://github.com/Neto02) a utilizarem versionamento e os ensinando a trabalhar em projetos em conjunto, desde a criação de Branchs até como funciona um Pull Request. No entanto, eu, [Bruno](https://github.com/Bruno-Gdos), apaixonado por desafios, encontrei uma forma de aprimorar ainda mais e implementar novos recursos para que o bot pudesse ser utilizado por mim diariamente de forma pessoal.
 
+## Pessoas que já contribuíram
 
+<a href="https://github.com/Bruno-Gdos/CalyxBot/graphs/contributors"><img src="https://contrib.rocks/image?repo=Bruno-Gdos/CalyxBot" /></a>
 
