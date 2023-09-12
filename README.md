@@ -40,7 +40,7 @@ CalyxBot é um bot do discord que possui diversas funcionalidades, dentre elas a
 </details>
 
 <details>
-  <summary> Busca das melhores promoções do [Pelando](https://www.pelando.com.br/)</summary>
+  <summary> Busca das melhores promoções do Pelando</summary>
   
   ### ScreenShot
   <img src="https://github.com/Bruno-Gdos/CalyxBot/assets/87917525/94b6a8cc-cfeb-423b-9278-256572c93ceb" alt="image" width="500px">
